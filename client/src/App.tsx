@@ -1,20 +1,65 @@
-import React from 'react';
-import './App.css';
-import { Person } from './components/Person';
-import { person } from './components/types';
-import { IPerson } from './interface';
+import React, { ChangeEvent, FC, useState } from "react";
+import "./App.css";
+import { TodoTask } from "./components/TodoTask";
+import { ITask } from "./interfaces";
 
-function App() {
-  const person: person = {
-    name:"cleiton rasta",
-    age:32
+const App: FC = () => {
+
+  const [task, setTask] = useState<string>("");
+  const [deadline, setDeadline] = useState<number>(0);
+  const [todoList, setTodoList] = useState<ITask[]>([]);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    if (event.target.name === "task") {
+      setTask(event.target.value);
+    } else {
+      setDeadline(Number(event.target.value));
+    }
+  };
+
+  const addTask = ():void => {
+    const newTask = {taskName: task, deadline}
+    setTodoList([...todoList, newTask])
+    setTask("")
+    setDeadline(0)
+    console.log(todoList)
+  }
+
+  const completeTask = (taskNameToDelete: string):void => {
+    setTodoList(todoList.filter((task) => {
+      return task.taskName !== taskNameToDelete
+    }))
   }
 
   return (
     <div className="App">
-      <Person name={"Denis"} age={20} person={person}/>
+      <div className="header">
+        <div className="inputContainer">
+          <input
+            type="text"
+            name="task"
+            value={task}
+            placeholder="Task..."
+            onChange={handleChange}
+          />
+          <input
+            type="number"
+            name="deadline"
+            value={deadline}
+            placeholder="Deadline (in days)..."
+            onChange={handleChange}
+          />
+        </div>
+
+        <button onClick={addTask}>Add Task</button>
+      </div>
+      <div className="todoList"> 
+        {todoList.map((task: ITask, key: number)=>{
+          return <TodoTask key={key} task={task} completeTask={completeTask}/>
+        })}
+      </div>
     </div>
   );
-}
+};
 
 export default App;

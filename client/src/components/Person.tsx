@@ -1,6 +1,5 @@
-import React, {FC} from 'react';
-import { IPerson } from '../interface';
-import { person } from './types';
+import {FC} from 'react';
+import { person } from '../types';
 
 interface IPersonProps {
 name: string
