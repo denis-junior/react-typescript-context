@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC, useState } from "react";
 import "./App.css";
+import { Header } from "./components/Header";
 import { TodoTask } from "./components/TodoTask";
 import { ITask } from "./interfaces";
 
@@ -32,31 +33,14 @@ const App: FC = () => {
 
   return (
     <div className="App">
-      <div className="header">
-        <div className="inputContainer">
-          <input
-            type="text"
-            name="task"
-            value={task}
-            placeholder="Task..."
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            name="deadline"
-            value={deadline}
-            placeholder="Deadline (in days)..."
-            onChange={handleChange}
-          />
-        </div>
-
-        <button onClick={addTask}>Add Task</button>
-      </div>
+      
+      <Header/>
       <div className="todoList"> 
         {todoList.map((task: ITask, key: number)=>{
           return <TodoTask key={key} task={task} completeTask={completeTask}/>
         })}
       </div>
+      
     </div>
   );
 };
