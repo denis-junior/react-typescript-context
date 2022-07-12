@@ -6,7 +6,7 @@ export interface ITodoTaskProps {
     completeTask(taskNameToDelete: string): void
 }
 
-export const TodoTask: FC<ITodoTaskProps> = ({task, completeTask}) => {
+export const TodoTask: FC<ITodoTaskProps> = () => {
   return (
     <div className='task'>
         <div className="content">
