@@ -1,6 +1,5 @@
 import {
   ChangeEvent,
-  Children,
   createContext,
   ReactNode,
   useState,
@@ -14,8 +13,8 @@ type TodoTaskContextType = {
   setDeadline: Function;
   todoList: Array<ITask>;
   setTodoList: Function;
-  addTask: Function;
-  handleChange: Function;
+  addTask: () => void;
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   completeTask: Function;
 };
 
@@ -35,8 +34,7 @@ const initialValues = {
   completeTask: () => {},
 };
 
-export const TodoTaskContext =
-  createContext<TodoTaskContextType>(initialValues);
+export const TodoTaskContext = createContext<TodoTaskContextType>(initialValues);
 
 export const TodoTaskContextProvider = ({ children }: TodoTaskContextProps) => {
   const [task, setTask] = useState(initialValues.task);
@@ -68,8 +66,7 @@ export const TodoTaskContextProvider = ({ children }: TodoTaskContextProps) => {
 
   return (
     <TodoTaskContext.Provider
-      value={{ task, setTask, deadline, setDeadline, todoList, setTodoList, addTask, handleChange, completeTask}}
-    >
+      value={{ task, setTask, deadline, setDeadline, todoList, setTodoList, addTask, handleChange, completeTask}} >
       {children}
     </TodoTaskContext.Provider>
   );

@@ -1,19 +1,35 @@
-import React, {FC} from 'react';
-import { ITask } from '../interfaces';
+import { FC, useContext } from "react";
+import { TodoTaskContext } from "../contexts/TodoTaskContext";
 
-export interface ITodoTaskProps {
-    task: ITask
-    completeTask(taskNameToDelete: string): void
-}
+export interface ITodoTaskProps {}
 
 export const TodoTask: FC<ITodoTaskProps> = () => {
+  const { todoList, completeTask } = useContext(TodoTaskContext);
+
   return (
-    <div className='task'>
-        <div className="content">
-            <span>{task.taskName}</span>
-            <span>{task.deadline}</span>
-        </div>
-        <button onClick={()=>{completeTask(task.taskName)}}>X</button>
-    </div>
+    <>
+      {todoList.map((task, key) => {
+        return (
+          <>
+            <div className="card w-25 mt-5">
+              <div className="card-header text-center">
+                <span key={key}>{task.taskName}</span>
+              </div>
+              <div className="card-body text-center">
+                <span key={key}> <b>Time:</b> {task.deadline} days</span>
+              </div>
+
+              <button
+                onClick={() => {
+                  completeTask(task.taskName);
+                }}
+              >
+                <b>Finished</b>
+              </button>
+            </div>
+          </>
+        );
+      })}
+    </>
   );
-}
+};
