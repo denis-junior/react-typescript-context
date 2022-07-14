@@ -1,16 +1,17 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { TodoTaskContext } from "../contexts/TodoTaskContext";
 
 export function Header() {
-  
-  const {task, handleChange, deadline, addTask} = useContext(TodoTaskContext)
-  
+  const { task, handleChange, deadline, addTask } = useContext(TodoTaskContext);
+
   return (
-    <div className="navbar bg-dark w-100 d-flex align-items-center justify-content-center">
-      <div className=" px-5">
-        
+    <>
+      <div className="navbar bg-dark w-100 d-flex align-items-center justify-content-center">
+        <div className=" px-5 d-flex flex-column align-items-center justify-content-center">
+        <h3 className="text-white">To-do List</h3>
           <input
             type="text"
+            className="form-control my-3"
             name="task"
             value={task}
             placeholder="Task..."
@@ -18,16 +19,17 @@ export function Header() {
           />
           <input
             type="number"
+            className="form-control"
             name="deadline"
             value={deadline}
             placeholder="Deadline (in days)..."
             onChange={handleChange}
           />
-        <button onClick={addTask}>Add Task</button>
-
-      
+          <button className="btn btn-outline-light my-4" onClick={addTask}>
+            Add Task
+          </button>
+        </div>
       </div>
-
-    </div>
+    </>
   );
 }

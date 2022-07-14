@@ -37,20 +37,23 @@ const initialValues = {
 export const TodoTaskContext = createContext<TodoTaskContextType>(initialValues);
 
 export const TodoTaskContextProvider = ({ children }: TodoTaskContextProps) => {
-  const [task, setTask] = useState(initialValues.task);
-  const [deadline, setDeadline] = useState(initialValues.deadline);
+  const [task, setTask] = useState<string>(initialValues.task);
+  const [deadline, setDeadline] = useState<number>(initialValues.deadline);
   const [todoList, setTodoList] = useState<ITask[]>(initialValues.todoList);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.name === "task") {
+      console.log(event.target.name + "\n value:" + event.target.value)
       setTask(event.target.value);
     } else {
+      console.log(event.target.name + "\n value:" + event.target.value)
       setDeadline(Number(event.target.value));
     }
   };
 
   const addTask = (): void => {
     const newTask = { taskName: task, deadline };
+    console.log(newTask)
     setTodoList([...todoList, newTask]);
     setTask("");
     setDeadline(0);

@@ -13,10 +13,10 @@ export const TodoTask: FC<ITodoTaskProps> = () => {
           <>
             <div className="card w-25 mt-5">
               <div className="card-header text-center">
-                <span key={key}>{task.taskName}</span>
+                <span key={key}> <b>{task.taskName}</b></span>
               </div>
               <div className="card-body text-center">
-                <span key={key}> <b>Time:</b> {task.deadline} days</span>
+                <span key={key}> <b>Estimate:</b> {task.deadline} days</span>
               </div>
 
               <button
@@ -24,7 +24,7 @@ export const TodoTask: FC<ITodoTaskProps> = () => {
                   completeTask(task.taskName);
                 }}
               >
-                <b>Finished</b>
+                Finished
               </button>
             </div>
           </>
