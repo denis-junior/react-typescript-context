@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import { TodoTaskContext } from "../contexts/TodoTaskContext";
 
-export interface IHeaderProps {}
-
-export function Header(props: IHeaderProps) {
+export function Header() {
   
   const {task, handleChange, deadline, addTask} = useContext(TodoTaskContext)
   
